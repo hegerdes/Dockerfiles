@@ -4,7 +4,8 @@
 ARG VARIANT="buster"
 FROM hegerdes/vscode-latex:${VARIANT}
 
-RUN apt-get update && apt-get install -y texlive-lang-all asymptote biber chktex \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
+    apt-get install -y texlive-lang-all asymptote biber chktex \
     cm-super context dvidvi dvipng feynmf fragmaster lacheck latex-cjk-all \
     latexmk lcdf-typetools prerex psutils purifyeps t1utils tex-gyre latexdiff \
     texlive-base texlive-bibtex-extra texlive-binaries texlive-extra-utils \
