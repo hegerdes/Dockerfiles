@@ -31,8 +31,7 @@ for VARIANT in ${VARIANTS[@]}; do
     VARIANT_BUILD_TAG=(${VARIANT//:/ })
     VARIANT_NAME_TAG=(${VARIANT_BUILD_TAG[1]//-/ })
     echo "Building ${IMAGE_NAME}:${VARIANT_NAME_TAG[0]}..."
-    echo "docker build --build-arg VARIANT=${VARIANT} --build-arg PANDOC_URL=${PANDOC_DOWNLOAD_URL} -f "Dockerfile.base" -t $IMAGE_NAME:${VARIANT_NAME_TAG[0]} ."
-    docker build --build-arg VARIANT=$VARIANT --build-arg PANDOC_URL=$PANDOC_DOWNLOAD_URL -f "Dockerfile.base" -t $IMAGE_NAME:${VARIANT_NAME_TAG[0]} .
+    docker build --pull --build-arg VARIANT=$VARIANT --build-arg PANDOC_URL=$PANDOC_DOWNLOAD_URL -f "Dockerfile.base" -t $IMAGE_NAME:${VARIANT_NAME_TAG[0]} .
     if [ $PUSH = "TRUE" ]; then
         docker push $IMAGE_NAME:${VARIANT_NAME_TAG[0]}
     fi
@@ -49,7 +48,7 @@ for VARIANT in ${VARIANTS[@]}; do
     VARIANT_BUILD_TAG=(${VARIANT//:/ })
     VARIANT_NAME_TAG=(${VARIANT_BUILD_TAG[1]//-/ })
     echo "Building ${IMAGE_NAME}:${VARIANT_NAME_TAG[0]}-slim..."
-    docker build --build-arg VARIANT=$VARIANT -f "Dockerfile.base-slim" -t $IMAGE_NAME:${VARIANT_NAME_TAG[0]}-slim .
+    docker build --pull --build-arg VARIANT=$VARIANT -f "Dockerfile.base-slim" -t $IMAGE_NAME:${VARIANT_NAME_TAG[0]}-slim .
     if [ $PUSH = "TRUE" ]; then
         docker push $IMAGE_NAME:${VARIANT_NAME_TAG[0]}-slim
     fi
