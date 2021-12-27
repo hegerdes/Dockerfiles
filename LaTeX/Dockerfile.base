@@ -1,5 +1,5 @@
 # [Choice] Debian version: buster, stretch
-ARG VARIANT="debian:buster-slim"
+ARG VARIANT="debian:bullseye-slim"
 FROM ${VARIANT}
 
 # [Options]
