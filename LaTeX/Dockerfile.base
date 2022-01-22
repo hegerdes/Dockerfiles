@@ -16,7 +16,7 @@ RUN bash /tmp/library-scripts/install-goodies.sh "${INSTALL_ZSH}" "${USERNAME}" 
 # Install tools
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \
     apt-get upgrade -y && apt-get install --no-install-recommends --yes \
-    zsh man ssh zip python3 git python3-pip bash-completion neovim nano less wget curl && \
+    zsh ssh-client zip git bash-completion neovim nano less wget curl && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Install LaTeX

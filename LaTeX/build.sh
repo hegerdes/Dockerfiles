@@ -8,7 +8,7 @@ bash ../Common/CreateBuilder.sh
 # Setup
 IMAGE_NAME="hegerdes/vscode-latex"
 PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7"
-VARIANTS=(debian:buster-slim debian:bullseye-slim ubuntu:focal ubuntu:bionic)
+VARIANTS=(debian:bullseye-slim ubuntu:focal)
 LANGUAGES=(all arabic chinese cjk cyrillic czechslovak english european french german greek italian japanese korean other polish portuguese spanish)
 DO_PUSH=""
 PANDOC_DOWNLOAD_URL="https://github.com/jgm/pandoc/releases/download/2.14.2/pandoc-2.16.2-1-amd64.deb"
@@ -40,8 +40,6 @@ for VARIANT in ${VARIANTS[@]}; do
     docker buildx build --cache-from type=local,src=/tmp/docker-cache --cache-to=type=local,dest=/tmp/docker-cache,mode=max --platform $PLATFORMS --pull --build-arg VARIANT=$VARIANT -f "Dockerfile.base-slim" -t $IMAGE_NAME:${VARIANT_NAME_TAG[0]}-slim $DO_PUSH .
 done
 
-# Fewer variants
-VARIANTS=(bullseye focal)
 # Build language variants
 for VARIANT in ${VARIANTS[@]}; do
     for LANG in ${LANGUAGES[@]}; do
